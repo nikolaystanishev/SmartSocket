@@ -1,12 +1,16 @@
 #include "ESP8266WiFi.h"
+#include <ESP8266WebServer.h>
 
 const char* ssid = "YOUR WIFI NETWORK NAME";
 const char* password = "YOUR WIFI PASSWARD";
+
+ESP8266WebServer server(80);
 
 void setup() {
     Serial.begin(9600);
 
     setupWiFi();
+    startServer();
     
     pinMode(D0, OUTPUT);
     pinMode(D1, OUTPUT);
@@ -20,7 +24,7 @@ void setup() {
 }
 
 void loop() {
-
+    server.handleClient();
 }
 
 void setupWiFi() {
@@ -32,7 +36,17 @@ void setupWiFi() {
     }
     
     Serial.println("");
-    Serial.println("WiFi connected");
+    Serial.print("WiFi connected to: ");
+    Serial.println(ssid);
     Serial.print("IP Adress: ");
     Serial.println(WiFi.localIP());
+}
+
+void startServer() {
+    server.on("/", [](){
+        server.send(200, "text/plain", "Hello World");
+    });
+
+    server.begin();
+    Serial.println("HTTP server started.");
 }
