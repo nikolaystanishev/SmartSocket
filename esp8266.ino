@@ -11,7 +11,7 @@ void setup() {
 
     setupWiFi();
     startServer();
-    
+
     pinMode(D0, OUTPUT);
     pinMode(D1, OUTPUT);
     pinMode(D2, OUTPUT);
@@ -34,7 +34,7 @@ void setupWiFi() {
         delay(500);
         Serial.print(".");
     }
-    
+
     Serial.println("");
     Serial.print("WiFi connected to: ");
     Serial.println(ssid);
@@ -43,10 +43,17 @@ void setupWiFi() {
 }
 
 void startServer() {
-    server.on("/", [](){
-        server.send(200, "text/plain", "Hello World");
-    });
+    server.on("/", HTTP_POST, std::bind(&handler));
 
     server.begin();
     Serial.println("HTTP server started.");
+}
+
+void handler() {
+    int pin = atoi(server.arg("pin").c_str());
+    int value = atoi(server.arg("value").c_str());
+
+    Serial.println(pin);
+    Serial.println(value);
+    server.send(200);
 }
