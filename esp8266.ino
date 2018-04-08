@@ -12,15 +12,15 @@ void setup() {
     setupWiFi();
     startServer();
 
-    pinMode(D0, OUTPUT);
     pinMode(D1, OUTPUT);
     pinMode(D2, OUTPUT);
     pinMode(D3, OUTPUT);
+    pinMode(D4, OUTPUT);
 
-    digitalWrite(D0, HIGH);
     digitalWrite(D1, HIGH);
     digitalWrite(D2, HIGH);
     digitalWrite(D3, HIGH);
+    digitalWrite(D4, HIGH);
 }
 
 void loop() {
