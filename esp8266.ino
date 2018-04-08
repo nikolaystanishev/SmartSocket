@@ -53,7 +53,24 @@ void handler() {
     int pin = atoi(server.arg("pin").c_str());
     int value = atoi(server.arg("value").c_str());
 
-    Serial.println(pin);
-    Serial.println(value);
+    switch (pin) {
+        case 1:
+          pin = D1;
+          break;
+        case 2:
+          pin = D2;
+          break;
+        case 3:
+          pin = D3;
+          break;
+        case 4:
+          pin = D4;
+          break;
+        default:
+          pin = -1;
+    }
+
+    digitalWrite(pin, value);
+
     server.send(200);
 }
