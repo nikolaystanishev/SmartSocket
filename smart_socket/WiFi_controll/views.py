@@ -4,4 +4,4 @@ from django.shortcuts import render
 
 
 def WiFi_controll(request):
-    pass
+    return render(request, 'WiFi_controll.html')
