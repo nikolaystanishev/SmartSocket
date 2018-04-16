@@ -25,7 +25,7 @@ SECRET_KEY = '_gtb-f+2+4#dwv^^hzn%f&!&@f*2vmafaiowtavuv^hyj(ayd5'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['smart-socket-pvmks.herokuapp.com']
+ALLOWED_HOSTS = ['smart-socket-pvmks.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
