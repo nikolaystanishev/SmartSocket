@@ -1,1 +1,1 @@
-web: python smart_socket/manage.py runserver
+web: gunicorn smart_socket.wsgi --log-file -
