@@ -50,6 +50,17 @@ void startServer() {
 }
 
 void handler() {
+    if (server.args() != 2) {
+        server.send(400);
+        return;
+    }
+
+    if (!((server.argName(0) == "pin" or server.argName(1) == "pin") and
+            (server.argName(0) == "value" or server.argName(1) == "value"))){
+        server.send(400);
+        return;
+    }
+
     int pin = atoi(server.arg("pin").c_str());
     int value = atoi(server.arg("value").c_str());
 
@@ -67,7 +78,20 @@ void handler() {
           pin = D4;
           break;
         default:
-          pin = -1;
+          server.send(400);
+          return;
+    }
+
+    switch (value) {
+        case 0:
+          value = LOW;
+          break;
+        case 1:
+          value = HIGH;
+          break;
+        default:
+          server.send(400);
+          return;
     }
 
     digitalWrite(pin, value);
